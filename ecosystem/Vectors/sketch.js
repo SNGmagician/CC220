@@ -25,8 +25,8 @@ var Fcol = {
 function setup() {
 
   createCanvas(windowWidth, windowHeight);
-Sdx = random(0.75, 2);
-Sdy = random(0.5, 2);
+  Sdx = random(0.75, 2);
+  Sdy = random(0.5, 2);
 
   Fcol.r = random(75, 255);
   Fcol.g = random(75, 255);
@@ -72,12 +72,12 @@ function draw() {
 
   for (var i = 0; i < 250; i++) {
     Fish[i].display(Fcol.r, Fcol.g, Fcol.b);
-    Fish[i].move(random(-3,3),random(-3,3));
+    Fish[i].move(random(-3, 3), random(-3, 3));
   }
 
   function shark() {
     fill(120, 120, 120);
-    Sa = atan2(Sdy,Sdx);
+    Sa = atan2(Sdy, Sdx);
     rotate(Sa);
     push();
     noStroke();
@@ -101,33 +101,34 @@ function fish(FxI, FyI) {
 
   this.loc = createVector(this.loc.x, this.loc.y);
 
-  this.velocity = createVector(0,0);
+  this.velocity = createVector(0, 0);
 
-  this.acc = createVector(0,0);
+  this.acc = createVector(0, 0);
 }
 fish.prototype.display = function(r, g, b) {
-  Fa = atan(this.loc);
   push();
   noStroke();
   fill(r, g, b);
   translate(this.loc.x, this.loc.y);
-  rotate(Fa);
+  if (this.velocity.mag() > 0) {
+    rotate(this.velocity.heading() + HALF_PI);
+  }
   // ellipse(0, 0, 20, 20);
-triangle(0,0,20,0,10,20);
-triangle(1,0,20,1,10,-20);
+  triangle(-10, 0, 10, 0, 0, 20);
+  triangle(-10, 1, 10, 1, 0, -20);
   pop();
 };
 
 fish.prototype.move = function() {
-  this.shark = createVector(Sx,Sy);
-
-if (dist(this.loc.x, this.loc.y, Sx, Sy) > 180) {
-    this.acc.rotate(random(0,TWO_PI));
-}  else if (dist(this.loc.x, this.loc.y, Sx, Sy) < 150) {
+  this.shark = createVector(Sx, Sy);
+  // rotate(this.vel.heading());
+  if (dist(this.loc.x, this.loc.y, Sx, Sy) > 180) {
+    this.acc.rotate(random(0, TWO_PI));
+  } else if (dist(this.loc.x, this.loc.y, Sx, Sy) < 150) {
     this.acc = p5.Vector.sub(this.shark, this.loc);
     // this.acc.normalize();
-  }else if (dist(this.loc.x, this.loc.y, Sx, Sy) < 175) {
-    this.velocity = createVector(0,0);
+  } else if (dist(this.loc.x, this.loc.y, Sx, Sy) < 175) {
+    this.velocity = createVector(0, 0);
   }
   this.acc.setMag(0.05);
   this.acc.rotate(PI);
@@ -151,13 +152,13 @@ fish.prototype.checks = function() {
   if (this.loc.x > width) {
     this.loc.x = 0;
   } else if (this.loc.x < 0) {
-    this.loc.x = width-1;
+    this.loc.x = width - 1;
   }
 
   if (this.loc.y > height) {
     this.loc.y = 0;
   } else if (this.loc.y < 0) {
-    this.loc.y = height-1;
+    this.loc.y = height - 1;
   }
 
   if (this.velocity.mag() > 19) {
