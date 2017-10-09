@@ -121,7 +121,6 @@ fish.prototype.move = function() {
     this.acc = createVector(random(-1, 1), random(-1, 1));
   } else if (dist(this.loc.x, this.loc.y, Sx, Sy) < 150) {
     this.acc = p5.Vector.sub(this.shark, this.loc);
-    // this.acc.normalize();
   } else if (dist(this.loc.x, this.loc.y, Sx, Sy) < 175) {
     this.velocity = createVector(0, 0);
   }
@@ -134,7 +133,7 @@ fish.prototype.move = function() {
   this.velocity.add(this.acc);
 
   // limit the max velocity
-  this.velocity.limit(5);
+  this.velocity.limit(4);
 
   this.loc.add(this.velocity);
 
