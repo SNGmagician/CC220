@@ -12,9 +12,6 @@ var FxI = 100;
 var Fdx = 2;
 var FyI = 100;
 var Fdy = 1;
-// var Fvelx = 1;
-// var Fvely = 1;
-// var Frot = 0;
 var Fish = [];
 var Fcol = {
   r: 255,

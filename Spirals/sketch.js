@@ -25,9 +25,14 @@ function draw() {
     objs[i].frame();
   }
 noStroke();
-fill(0, 0, 0);
-ellipse(width/2, height/2, 35);
+// if (frameCount > delay) {
+  fill(0, 0, frameCount-delay);
+  ellipse(width/2, height/2, 35);
+// }else {
 
+  // fill(0, 0, 0);
+  // ellipse(width/2, height/2, 35);
+// }
 }
 
 
