@@ -100,7 +100,7 @@ function fish(FxI, FyI) {
 
   this.velocity = createVector(0, 0);
 
-  this.acc = createVector(random(-1,1),random(-1,1));
+  this.acc = createVector(random(-1, 1), random(-1, 1));
 }
 fish.prototype.display = function(r, g, b) {
   push();
@@ -110,7 +110,6 @@ fish.prototype.display = function(r, g, b) {
   if (this.velocity.mag() > 0) {
     rotate(this.velocity.heading() + HALF_PI);
   }
-  // ellipse(0, 0, 20, 20);
   triangle(-10, 0, 10, 0, 0, 20);
   triangle(-10, 1, 10, 1, 0, -20);
   pop();
@@ -118,9 +117,8 @@ fish.prototype.display = function(r, g, b) {
 
 fish.prototype.move = function() {
   this.shark = createVector(Sx, Sy);
-  // rotate(this.vel.heading());
   if (dist(this.loc.x, this.loc.y, Sx, Sy) > 180) {
-    this.acc = createVector(random(-1,1),random(-1,1));
+    this.acc = createVector(random(-1, 1), random(-1, 1));
   } else if (dist(this.loc.x, this.loc.y, Sx, Sy) < 150) {
     this.acc = p5.Vector.sub(this.shark, this.loc);
     // this.acc.normalize();
@@ -136,7 +134,7 @@ fish.prototype.move = function() {
   this.velocity.add(this.acc);
 
   // limit the max velocity
-  this.velocity.limit(3);
+  this.velocity.limit(5);
 
   this.loc.add(this.velocity);
 
