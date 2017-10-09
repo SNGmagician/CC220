@@ -100,7 +100,7 @@ function fish(FxI, FyI) {
 
   this.velocity = createVector(0, 0);
 
-  this.acc = createVector(0, 0);
+  this.acc = createVector(random(-1,1),random(-1,1));
 }
 fish.prototype.display = function(r, g, b) {
   push();
@@ -120,7 +120,7 @@ fish.prototype.move = function() {
   this.shark = createVector(Sx, Sy);
   // rotate(this.vel.heading());
   if (dist(this.loc.x, this.loc.y, Sx, Sy) > 180) {
-    this.acc.rotate(random(0, TWO_PI));
+    this.acc = createVector(random(-1,1),random(-1,1));
   } else if (dist(this.loc.x, this.loc.y, Sx, Sy) < 150) {
     this.acc = p5.Vector.sub(this.shark, this.loc);
     // this.acc.normalize();
